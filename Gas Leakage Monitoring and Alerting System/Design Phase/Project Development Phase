@@ -1,0 +1,38 @@
+#include<LiquidCrystal.h>
+int const gasInput = A1;
+int BUZZER = 10;
+
+LiquidCrystal LCD(9,8,4,5,6,7);
+
+void setup()
+{
+  LCD.begin(16,2);
+  serial.begin(9600);
+  LCD.print("STARTING");
+  
+}
+
+void loop()
+{
+  int value= analogRead(gasInput);
+  value=map(value,300,750,0,100);
+  serial.print(value);
+  serail.print('/n');
+  
+  delay(250);
+  LCD.clear();
+  
+  if(value>0)
+  {
+    LCD.print("STATUS : EMERGENCY");
+    tone(BUZZER,1000,200);
+   }
+  else if
+  {
+    LCD.print("STATUS : WARNING");
+  }
+  else
+   {
+   LCD.print("GOOD");
+   }
+}
